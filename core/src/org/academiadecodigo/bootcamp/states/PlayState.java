@@ -14,6 +14,7 @@ public class PlayState extends State {
     private Bird bird;
     private Texture backGround;
 
+
     public PlayState(GameStateManager gsm) {
         super(gsm);
         bird = new Bird(50, 100);
@@ -39,9 +40,8 @@ public class PlayState extends State {
         spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatch.begin();
 
-        spriteBatch.draw(backGround, camera.position.x - (camera.viewportWidth/2), 0);
+        spriteBatch.draw(backGround, camera.position.x - (camera.viewportWidth / 2), 0);
         spriteBatch.draw(bird.getTexture(), bird.getPosition().x, bird.getPosition().y);
-
 
         spriteBatch.end();
 
