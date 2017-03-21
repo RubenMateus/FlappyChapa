@@ -9,7 +9,7 @@ import org.academiadecodigo.bootcamp.FlappyBird;
 /**
  * Created by codecadet on 3/15/17.
  */
-public class MenuState extends State{
+public class MenuState extends State {
 
     private Texture backGround;
     private Texture playButton;
@@ -18,13 +18,15 @@ public class MenuState extends State{
         super(gsm);
         backGround = new Texture("bg.png");
         playButton = new Texture("playbtn.png");
+        camera.setToOrtho(false,0,0);
+        System.out.println(camera.position.x);
+        System.out.println(camera.position.y);
     }
 
     @Override
     public void handleInput() {
         if(Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)){
             gsm.set(new PlayState(gsm));
-            this.dispose();
         }
 
     }

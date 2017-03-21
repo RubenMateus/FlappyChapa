@@ -2,6 +2,7 @@ package org.academiadecodigo.bootcamp.sprites;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
@@ -15,10 +16,13 @@ public class Tube {
     private static final int FLUCTUATION = 130;
     private static final int TUBE_GAP = 100;
     private static final int LOWEST_OPENING = 120;
+
     private Texture topTube;
     private Texture bottomTube;
     private Vector2 posTopTube;
     private Vector2 posBotTube;
+    private Rectangle boundsBot;
+    private Rectangle boundsTop;
     private Random random;
 
 
@@ -27,18 +31,29 @@ public class Tube {
         bottomTube = new Texture("bottomtube.png");
         random = new Random();
 
-        posTopTube = new Vector2(x,random.nextInt(FLUCTUATION) + TUBE_GAP + LOWEST_OPENING);
+        posTopTube = new Vector2(x, random.nextInt(FLUCTUATION) + TUBE_GAP + LOWEST_OPENING);
         posBotTube = new Vector2(x, posTopTube.y - TUBE_GAP - bottomTube.getHeight());
+
+        boundsTop = new Rectangle(posTopTube.x, posTopTube.y, topTube.getWidth(), topTube.getHeight());
+        boundsBot = new Rectangle(posBotTube.x, posBotTube.y, bottomTube.getWidth(), bottomTube.getHeight());
     }
 
     public void update(float dt) {
 
     }
 
-    public void reposition(float x){
-        posTopTube.set(x,random.nextInt(FLUCTUATION) + TUBE_GAP + LOWEST_OPENING);
+    public void reposition(float x) {
+        posTopTube.set(x, random.nextInt(FLUCTUATION) + TUBE_GAP + LOWEST_OPENING);
         posBotTube.set(x, posTopTube.y - TUBE_GAP - bottomTube.getHeight());
+
+        boundsTop.setPosition(posTopTube.x, posTopTube.y);
+        boundsBot.setPosition(posBotTube.x, posBotTube.y);
     }
+
+    public boolean collides(Rectangle bird){
+        return bird.overlaps(boundsTop) || bird.overlaps(boundsBot);
+    }
+
     public Texture getTopTube() {
         return topTube;
     }
