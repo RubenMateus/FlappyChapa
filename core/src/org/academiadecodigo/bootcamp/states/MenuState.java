@@ -19,8 +19,6 @@ public class MenuState extends State {
         backGround = new Texture("bg.png");
         playButton = new Texture("playbtn.png");
         camera.setToOrtho(false,0,0);
-        System.out.println(camera.position.x);
-        System.out.println(camera.position.y);
     }
 
     @Override
@@ -48,5 +46,6 @@ public class MenuState extends State {
     public void dispose() {
         backGround.dispose();
         playButton.dispose();
+        System.out.println("MenuState disposed");
     }
 }

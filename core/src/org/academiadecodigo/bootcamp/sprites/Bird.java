@@ -54,4 +54,8 @@ public class Bird {
     public Texture getTexture() {
         return bird;
     }
+
+    public void dispose(){
+        bird.dispose();
+    }
 }
