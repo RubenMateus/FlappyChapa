@@ -38,10 +38,6 @@ public class Tube {
         boundsBot = new Rectangle(posBotTube.x, posBotTube.y, bottomTube.getWidth(), bottomTube.getHeight());
     }
 
-    public void update(float dt) {
-
-    }
-
     public void reposition(float x) {
         posTopTube.set(x, random.nextInt(FLUCTUATION) + TUBE_GAP + LOWEST_OPENING);
         posBotTube.set(x, posTopTube.y - TUBE_GAP - bottomTube.getHeight());
@@ -51,7 +47,12 @@ public class Tube {
     }
 
     public boolean collides(Rectangle bird){
-        return bird.overlaps(boundsTop) || bird.overlaps(boundsBot);
+
+        if(bird.overlaps(boundsTop) || bird.overlaps(boundsBot)){
+            return true;
+        }
+        
+        return false;
     }
 
     public Texture getTopTube() {

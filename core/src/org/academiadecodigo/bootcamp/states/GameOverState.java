@@ -1,0 +1,52 @@
+package org.academiadecodigo.bootcamp.states;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.academiadecodigo.bootcamp.FlappyBird;
+
+/**
+ * Created by Ruben on 25/03/2017.
+ */
+public class GameOverState extends State {
+
+    private Texture backGround;
+    private Texture gameOver;
+
+    public GameOverState(GameStateManager gsm) {
+        super(gsm);
+        camera.setToOrtho(false, FlappyBird.WIDTH / 2, FlappyBird.HEIGHT / 2);
+        backGround = new Texture("bg.png");
+        gameOver = new Texture("gameover.png");
+    }
+
+    @Override
+    public void handleInput() {
+        if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
+            gsm.set(new MenuState(gsm));
+        }
+
+    }
+
+    @Override
+    public void update(float dt) {
+        handleInput();
+    }
+
+    @Override
+    public void render(SpriteBatch spriteBatch) {
+        spriteBatch.setProjectionMatrix(camera.combined);
+        spriteBatch.begin();
+        spriteBatch.draw(backGround, 0, 0);
+        spriteBatch.draw(gameOver, camera.position.x - gameOver.getWidth() / 2, camera.position.y);
+        spriteBatch.end();
+    }
+
+    @Override
+    public void dispose() {
+        backGround.dispose();
+        gameOver.dispose();
+        System.out.println("GameOverState disposed");
+    }
+}

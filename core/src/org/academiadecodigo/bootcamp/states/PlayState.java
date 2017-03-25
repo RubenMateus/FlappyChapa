@@ -63,13 +63,14 @@ public class PlayState extends State {
             }
 
             if (tube.collides(bird.getBounds())) {
-                gsm.set(new MenuState(gsm));
+                gsm.set(new GameOverState(gsm));
             }
         }
 
         if(bird.getPosition().y <= ground.getHeight() + GROUND_Y_OFFSET){
-            gsm.set(new MenuState(gsm));
+            gsm.set(new GameOverState(gsm));
         }
+
         camera.update();
     }
 
@@ -80,6 +81,7 @@ public class PlayState extends State {
 
         spriteBatch.draw(backGround, camera.position.x - (camera.viewportWidth / 2), 0);
         spriteBatch.draw(bird.getTexture(), bird.getPosition().x, bird.getPosition().y);
+
         for (Tube tube : tubes) {
             spriteBatch.draw(tube.getTopTube(), tube.getPosTopTube().x, tube.getPosTopTube().y);
             spriteBatch.draw(tube.getBottomTube(), tube.getPosBotTube().x, tube.getPosBotTube().y);
