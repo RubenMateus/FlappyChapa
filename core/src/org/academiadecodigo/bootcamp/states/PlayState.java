@@ -63,10 +63,13 @@ public class PlayState extends State {
             }
 
             if (tube.collides(bird.getBounds())) {
-                gsm.set(new PlayState(gsm));
+                gsm.set(new MenuState(gsm));
             }
         }
-        if(bird.getPosition().y <= ground.getHeight() + GROUND_Y_OFFSET)
+
+        if(bird.getPosition().y <= ground.getHeight() + GROUND_Y_OFFSET){
+            gsm.set(new MenuState(gsm));
+        }
         camera.update();
     }
 
@@ -91,9 +94,10 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
-        bird.getTexture().dispose();
         backGround.dispose();
         bird.dispose();
+        ground.dispose();
+
         for (Tube tube : tubes) {
             tube.dispose();
             System.out.println("PlayState Disposed");
