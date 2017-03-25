@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import org.academiadecodigo.bootcamp.FlappyBird;
+import org.academiadecodigo.bootcamp.FlappyChapa;
 
 /**
  * Created by codecadet on 3/15/17.
@@ -16,7 +16,7 @@ public class MenuState extends State {
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
-        camera.setToOrtho(false, FlappyBird.WIDTH / 2, FlappyBird.HEIGHT / 2);
+        camera.setToOrtho(false, FlappyChapa.WIDTH / 2, FlappyChapa.HEIGHT / 2);
         backGround = new Texture("bg.png");
         playButton = new Texture("playbtn.png");
     }

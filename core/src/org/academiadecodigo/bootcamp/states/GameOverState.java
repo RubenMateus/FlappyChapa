@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import org.academiadecodigo.bootcamp.FlappyBird;
+import org.academiadecodigo.bootcamp.FlappyChapa;
 
 /**
  * Created by Ruben on 25/03/2017.
@@ -16,7 +16,7 @@ public class GameOverState extends State {
 
     public GameOverState(GameStateManager gsm) {
         super(gsm);
-        camera.setToOrtho(false, FlappyBird.WIDTH / 2, FlappyBird.HEIGHT / 2);
+        camera.setToOrtho(false, FlappyChapa.WIDTH / 2, FlappyChapa.HEIGHT / 2);
         backGround = new Texture("bg.png");
         gameOver = new Texture("gameover.png");
     }

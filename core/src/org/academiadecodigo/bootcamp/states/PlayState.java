@@ -1,12 +1,11 @@
 package org.academiadecodigo.bootcamp.states;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import org.academiadecodigo.bootcamp.FlappyBird;
+import org.academiadecodigo.bootcamp.FlappyChapa;
 import org.academiadecodigo.bootcamp.sprites.Bird;
 import org.academiadecodigo.bootcamp.sprites.Tube;
 
@@ -29,7 +28,7 @@ public class PlayState extends State {
     public PlayState(GameStateManager gsm) {
         super(gsm);
         bird = new Bird(50, 300);
-        camera.setToOrtho(false, FlappyBird.WIDTH / 2, FlappyBird.HEIGHT / 2);
+        camera.setToOrtho(false, FlappyChapa.WIDTH / 2, FlappyChapa.HEIGHT / 2);
         backGround = new Texture("bg.png");
         ground = new Texture("ground.png");
         groundPos1 = new Vector2(camera.position.x - camera.viewportWidth / 2, GROUND_Y_OFFSET);
