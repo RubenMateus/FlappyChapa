@@ -23,10 +23,9 @@ public class GameOverState extends State {
 
     @Override
     public void handleInput() {
-        if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
+        if (Gdx.input.justTouched()){
             gsm.set(new MenuState(gsm));
         }
-
     }
 
     @Override
