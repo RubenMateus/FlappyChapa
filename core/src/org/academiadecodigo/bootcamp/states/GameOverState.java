@@ -24,7 +24,7 @@ public class GameOverState extends State {
         backGround = new Texture("bg.png");
         gameOver = new Texture("gameover.png");
         chapaTriggered = new Texture("chapaTriggered.png");
-        texture = new Texture("chapaicon.png");
+        texture = new Texture("icons/chapaicon.png");
     }
 
     @Override

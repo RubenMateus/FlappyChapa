@@ -11,9 +11,9 @@ public class DesktopLauncher {
 		config.width = FlappyChapa.WIDTH;
 		config.height = FlappyChapa.HEIGHT;
 		config.title = FlappyChapa.TITLE;
-		config.addIcon("chapaicon.png", Files.FileType.Internal);
-		config.addIcon("chapaicon1.png", Files.FileType.Internal);
-        config.addIcon("chapaicon2.png", Files.FileType.Internal);
+		config.addIcon("icons/chapaicon.png", Files.FileType.Internal);
+		config.addIcon("icons/chapaicon1.png", Files.FileType.Internal);
+        config.addIcon("icons/chapaicon2.png", Files.FileType.Internal);
 		new LwjglApplication(new FlappyChapa(), config);
 	}
 }
