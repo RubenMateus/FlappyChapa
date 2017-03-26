@@ -32,8 +32,8 @@ public class PlayState extends State {
         camera.setToOrtho(false, FlappyChapa.WIDTH / 2, FlappyChapa.HEIGHT / 2);
         backGround = new Texture("bg.png");
         ground = new Texture("ground.png");
-        groundPos1 = new Vector2(camera.position.x - camera.viewportWidth / 2, GROUND_Y_OFFSET);
-        groundPos2 = new Vector2((camera.position.x - camera.viewportWidth / 2) + ground.getWidth(), GROUND_Y_OFFSET);
+//        groundPos1 = new Vector2(camera.position.x - camera.viewportWidth / 2, GROUND_Y_OFFSET);
+//        groundPos2 = new Vector2((camera.position.x - camera.viewportWidth / 2) + ground.getWidth(), GROUND_Y_OFFSET);
         tubes = new Array<Tube>();
         for (int i = 0; i < TUBE_COUNT; i++) {
             tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH)));
@@ -50,7 +50,7 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         handleInput();
-        updateGround();
+//        updateGround();
         bird.update(dt);
 
         camera.position.x = bird.getPosition().x + 80;
@@ -67,9 +67,9 @@ public class PlayState extends State {
             }
         }
 
-        if(bird.getPosition().y <= ground.getHeight() + GROUND_Y_OFFSET){
-            gsm.set(new GameOverState(gsm));
-        }
+//        if(bird.getPosition().y <= ground.getHeight() + GROUND_Y_OFFSET){
+//            gsm.set(new GameOverState(gsm));
+//        }
 
         camera.update();
     }
@@ -87,8 +87,8 @@ public class PlayState extends State {
             spriteBatch.draw(tube.getBottomTube(), tube.getPosBotTube().x, tube.getPosBotTube().y);
         }
 
-        spriteBatch.draw(ground, groundPos1.x, groundPos1.y);
-        spriteBatch.draw(ground, groundPos2.x, groundPos2.y);
+//        spriteBatch.draw(ground, groundPos1.x, groundPos1.y);
+//        spriteBatch.draw(ground, groundPos2.x, groundPos2.y);
 
         spriteBatch.end();
 

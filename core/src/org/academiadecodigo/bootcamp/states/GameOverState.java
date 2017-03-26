@@ -13,17 +13,19 @@ public class GameOverState extends State {
 
     private Texture backGround;
     private Texture gameOver;
+    private Texture chapaTriggered;
 
     public GameOverState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, FlappyChapa.WIDTH / 2, FlappyChapa.HEIGHT / 2);
         backGround = new Texture("bg.png");
         gameOver = new Texture("gameover.png");
+        chapaTriggered = new Texture("chapaTriggered.png");
     }
 
     @Override
     public void handleInput() {
-        if (Gdx.input.justTouched()){
+        if (Gdx.input.justTouched()) {
             gsm.set(new MenuState(gsm));
         }
     }
@@ -39,6 +41,7 @@ public class GameOverState extends State {
         spriteBatch.begin();
         spriteBatch.draw(backGround, 0, 0);
         spriteBatch.draw(gameOver, camera.position.x - gameOver.getWidth() / 2, camera.position.y);
+        spriteBatch.draw(chapaTriggered, camera.position.x - chapaTriggered.getWidth() / 2, camera.position.y / 1.5f);
         spriteBatch.end();
     }
 
