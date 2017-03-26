@@ -29,9 +29,9 @@ public class FlappyChapa extends ApplicationAdapter {
     }
 
     private void initMusic() {
-        music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("bigSmoke.mp3"));
         music.setLooping(true);
-        music.setVolume(0.1f);
+        music.setVolume(0.5f);
         music.play();
     }
 
