@@ -20,31 +20,31 @@ public class FlappyChapa extends ApplicationAdapter {
     private SpriteBatch batch;
     private Music music;
 
-	@Override
-	public void create () {
-		batch = new SpriteBatch();
+    @Override
+    public void create() {
+        batch = new SpriteBatch();
         gsm = new GameStateManager();
-		initMusic();
+        initMusic();
         gsm.push(new MenuState(gsm));
-	}
+    }
 
-	private void initMusic() {
-		music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
-		music.setLooping(true);
-		music.setVolume(0.1f);
-		music.play();
-	}
+    private void initMusic() {
+        music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
+        music.setLooping(true);
+        music.setVolume(0.1f);
+        music.play();
+    }
 
-	@Override
-	public void render () {
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    @Override
+    public void render() {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         gsm.update(Gdx.graphics.getDeltaTime());
         gsm.render(batch);
-	}
-	
-	@Override
-	public void dispose () {
-		batch.dispose();
-		music.dispose();
-	}
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+        music.dispose();
+    }
 }

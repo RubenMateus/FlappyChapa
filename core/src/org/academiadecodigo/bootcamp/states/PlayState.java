@@ -13,6 +13,7 @@ import org.academiadecodigo.bootcamp.sprites.Tube;
  * Created by codecadet on 3/15/17.
  */
 public class PlayState extends State {
+    //Constants
     private static final int TUBE_SPACING = 125;
     private static final int TUBE_COUNT = 4;
     private static final int GROUND_Y_OFFSET = -30;
@@ -101,7 +102,6 @@ public class PlayState extends State {
 
         for (Tube tube : tubes) {
             tube.dispose();
-            System.out.println("PlayState Disposed");
         }
     }
 
