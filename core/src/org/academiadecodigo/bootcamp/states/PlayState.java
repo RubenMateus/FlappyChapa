@@ -1,13 +1,13 @@
-package org.academiadecodigo.bootcamp.states;
+package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import org.academiadecodigo.bootcamp.FlappyChapa;
-import org.academiadecodigo.bootcamp.sprites.Bird;
-import org.academiadecodigo.bootcamp.sprites.Tube;
+import com.mygdx.game.FlappyChapa;
+import com.mygdx.game.sprites.Bird;
+import com.mygdx.game.sprites.Tube;
 
 /**
  * Created by codecadet on 3/15/17.
@@ -19,7 +19,7 @@ public class PlayState extends State {
     private static final int GROUND_Y_OFFSET = -30;
 
     private Bird bird;
-    private Texture backGround;
+    private Background backGround;
     private Texture ground;
     private Vector2 groundPos1;
     private Vector2 groundPos2;
@@ -30,7 +30,8 @@ public class PlayState extends State {
         super(gsm);
         bird = new Bird(50, 300);
         camera.setToOrtho(false, FlappyChapa.WIDTH / 2, FlappyChapa.HEIGHT / 2);
-        backGround = new Texture("bg.png");
+        Texture texture = new Texture("bg.png");
+        backGround = new Background(camera);
         ground = new Texture("ground.png");
 //        groundPos1 = new Vector2(camera.position.x - camera.viewportWidth / 2, GROUND_Y_OFFSET);
 //        groundPos2 = new Vector2((camera.position.x - camera.viewportWidth / 2) + ground.getWidth(), GROUND_Y_OFFSET);
@@ -54,6 +55,9 @@ public class PlayState extends State {
         bird.update(dt);
 
         camera.position.x = bird.getPosition().x + 80;
+
+        backGround.move(dt);
+        backGround.start();
 
         for (int i = 0; i < tubes.size; i++) {
             Tube tube = tubes.get(i);
@@ -79,7 +83,8 @@ public class PlayState extends State {
         spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatch.begin();
 
-        spriteBatch.draw(backGround, camera.position.x - (camera.viewportWidth / 2), 0);
+        //spriteBatch.draw(backGround, camera.position.x - (camera.viewportWidth / 2), 0);
+        backGround.render(spriteBatch);
         spriteBatch.draw(bird.getTexture(), bird.getPosition().x, bird.getPosition().y);
 
         for (Tube tube : tubes) {
