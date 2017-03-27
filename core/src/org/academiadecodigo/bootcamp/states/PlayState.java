@@ -109,6 +109,7 @@ public class PlayState extends State {
         if (camera.position.x - (camera.viewportWidth / 2) > groundPos1.x + ground.getWidth()) {
             groundPos1.add(ground.getWidth() * 2, 0);
         }
+
         if (camera.position.x - (camera.viewportWidth / 2) > groundPos2.x + ground.getWidth()) {
             groundPos2.add(ground.getWidth() * 2, 0);
         }
