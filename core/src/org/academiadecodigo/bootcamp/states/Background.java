@@ -1,10 +1,10 @@
-package com.mygdx.game.states;
+package org.academiadecodigo.bootcamp.states;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.FlappyChapa;
+import org.academiadecodigo.bootcamp.FlappyChapa;
 
 /**
  * Created by codecadet on 3/16/17.

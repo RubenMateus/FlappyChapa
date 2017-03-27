@@ -1,14 +1,15 @@
-package com.mygdx.game.states;
+package org.academiadecodigo.bootcamp.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.FlappyChapa;
-import com.mygdx.game.sprites.Bird;
-import com.mygdx.game.sprites.Tube;
-
+import org.academiadecodigo.bootcamp.FlappyChapa;
+import org.academiadecodigo.bootcamp.sprites.Bird;
+import org.academiadecodigo.bootcamp.sprites.Tube;
+import org.academiadecodigo.bootcamp.states.State;
+import org.academiadecodigo.bootcamp.states.Background;
 /**
  * Created by codecadet on 3/15/17.
  */
