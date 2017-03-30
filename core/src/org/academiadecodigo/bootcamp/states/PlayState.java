@@ -6,10 +6,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import org.academiadecodigo.bootcamp.FlappyChapa;
-import org.academiadecodigo.bootcamp.sprites.Bird;
+import org.academiadecodigo.bootcamp.sprites.Chapa;
 import org.academiadecodigo.bootcamp.sprites.Tube;
-import org.academiadecodigo.bootcamp.states.State;
-import org.academiadecodigo.bootcamp.states.Background;
+
 /**
  * Created by codecadet on 3/15/17.
  */
@@ -19,7 +18,7 @@ public class PlayState extends State {
     private static final int TUBE_COUNT = 4;
     private static final int GROUND_Y_OFFSET = -30;
 
-    private Bird bird;
+    private Chapa chapa;
     private Background backGround;
     private Texture ground;
     private Vector2 groundPos1;
@@ -29,7 +28,7 @@ public class PlayState extends State {
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        bird = new Bird(50, 300);
+        chapa = new Chapa(50, 300);
         camera.setToOrtho(false, FlappyChapa.WIDTH / 2, FlappyChapa.HEIGHT / 2);
         Texture texture = new Texture("bg.png");
         backGround = new Background(camera);
@@ -45,7 +44,7 @@ public class PlayState extends State {
     @Override
     protected void handleInput() {
         if (Gdx.input.justTouched()) {
-            bird.jump();
+            chapa.jump();
         }
     }
 
@@ -53,9 +52,9 @@ public class PlayState extends State {
     public void update(float dt) {
         handleInput();
 //        updateGround();
-        bird.update(dt);
+        chapa.update(dt);
 
-        camera.position.x = bird.getPosition().x + 80;
+        camera.position.x = chapa.getPosition().x + 80;
 
         backGround.move(dt);
         backGround.start();
@@ -67,12 +66,12 @@ public class PlayState extends State {
                 tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
             }
 
-            if (tube.collides(bird.getBounds())) {
+            if (tube.collides(chapa.getBounds())) {
                 gsm.set(new GameOverState(gsm));
             }
         }
 
-//        if(bird.getPosition().y <= ground.getHeight() + GROUND_Y_OFFSET){
+//        if(chapa.getPosition().y <= ground.getHeight() + GROUND_Y_OFFSET){
 //            gsm.set(new GameOverState(gsm));
 //        }
 
@@ -86,7 +85,7 @@ public class PlayState extends State {
 
         //spriteBatch.draw(backGround, camera.position.x - (camera.viewportWidth / 2), 0);
         backGround.render(spriteBatch);
-        spriteBatch.draw(bird.getTexture(), bird.getPosition().x, bird.getPosition().y);
+        spriteBatch.draw(chapa.getTexture(), chapa.getPosition().x, chapa.getPosition().y);
 
         for (Tube tube : tubes) {
             spriteBatch.draw(tube.getTopTube(), tube.getPosTopTube().x, tube.getPosTopTube().y);
@@ -103,7 +102,7 @@ public class PlayState extends State {
     @Override
     public void dispose() {
         backGround.dispose();
-        bird.dispose();
+        chapa.dispose();
         ground.dispose();
 
         for (Tube tube : tubes) {
