@@ -1,4 +1,4 @@
-package org.academiadecodigo.bootcamp.states;
+package org.academiadecodigo.bootcamp.sprites;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -32,8 +32,6 @@ public class Background {
 
     public Background(OrthographicCamera camera) {
 
-        score = 0;
-
         this.camera = camera;
         this.texture = new Texture("bg.png");
 
@@ -53,7 +51,6 @@ public class Background {
     public void move(float dt) {
 
         if (start) {
-            score++;
 
             if (camera.position.x - (camera.viewportWidth / 2) > sprite.getX() + sprite.getWidth()) {
                 sprite.setPosition(camera.position.x + spriteClone.getWidth() - camera.viewportWidth, 0);

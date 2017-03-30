@@ -5,17 +5,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import org.academiadecodigo.bootcamp.FlappyChapa;
-import org.academiadecodigo.bootcamp.Hud;
-import org.academiadecodigo.bootcamp.sprites.Chapa;
-import org.academiadecodigo.bootcamp.sprites.Tube;
-
-import java.util.Timer;
+import org.academiadecodigo.bootcamp.sprites.*;
 
 /**
  * Created by codecadet on 3/15/17.
@@ -27,7 +24,7 @@ public class PlayState extends State {
     private static final int GROUND_Y_OFFSET = -30;
 
     private Chapa chapa;
-    private Background backGround;
+    private org.academiadecodigo.bootcamp.sprites.Background backGround;
     private Texture ground;
     private Vector2 groundPos1;
     private Vector2 groundPos2;
@@ -38,6 +35,7 @@ public class PlayState extends State {
     private long startTime;
 
     private Array<Tube> tubes;
+    private Anto anto;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -45,7 +43,7 @@ public class PlayState extends State {
         chapa = new Chapa(50, 300);
         camera.setToOrtho(false, FlappyChapa.WIDTH / 2, FlappyChapa.HEIGHT / 2);
         Texture texture = new Texture("bg.png");
-        backGround = new Background(camera);
+        backGround = new org.academiadecodigo.bootcamp.sprites.Background(camera);
         backGround.start();
         ground = new Texture("ground.png");
         /*table = new Table();
@@ -55,6 +53,8 @@ public class PlayState extends State {
         scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel.setPosition(camera.position.x,0);
         startTime = TimeUtils.nanoTime();
+        anto = new Anto(camera);
+        anto.repositionAnto(camera.position.x,camera.position.y);
 //        groundPos1 = new Vector2(camera.position.x - camera.viewportWidth / 2, GROUND_Y_OFFSET);
 //        groundPos2 = new Vector2((camera.position.x - camera.viewportWidth / 2) + ground.getWidth(), GROUND_Y_OFFSET);
         tubes = new Array<Tube>();
@@ -84,9 +84,10 @@ public class PlayState extends State {
             startTime = TimeUtils.nanoTime();
         }
 
-            scoreLabel.setPosition(camera.position.x-20,camera.viewportHeight-15);
-        scoreLabel.setText(String.format("%06d", score));
         backGround.move(dt);
+
+        int random = (int)Math.floor(Math.random()*10)+1;
+        System.out.println(random);
 
         for (int i = 0; i < tubes.size; i++) {
             Tube tube = tubes.get(i);
@@ -96,14 +97,17 @@ public class PlayState extends State {
             }
 
             if (tube.collides(chapa.getBounds())) {
+                score = 0;
                 gsm.set(new GameOverState(gsm));
             }
+
         }
 
 //        if(chapa.getPosition().y <= ground.getHeight() + GROUND_Y_OFFSET){
 //            gsm.set(new GameOverState(gsm));
 //        }
-
+        scoreLabel.setPosition(camera.position.x-20,camera.viewportHeight-15);
+        scoreLabel.setText(String.format("%06d", score));
         camera.update();
     }
 
@@ -114,19 +118,19 @@ public class PlayState extends State {
 
         //spriteBatch.draw(backGround, camera.position.x - (camera.viewportWidth / 2), 0);
         backGround.render(spriteBatch);
-        scoreLabel.draw(spriteBatch,1);
+
         spriteBatch.draw(chapa.getTexture(), chapa.getPosition().x, chapa.getPosition().y);
 
         for (Tube tube : tubes) {
             spriteBatch.draw(tube.getTopTube(), tube.getPosTopTube().x, tube.getPosTopTube().y);
             spriteBatch.draw(tube.getBottomTube(), tube.getPosBotTube().x, tube.getPosBotTube().y);
         }
-
+        anto.render(spriteBatch);
 //        spriteBatch.draw(ground, groundPos1.x, groundPos1.y);
 //        spriteBatch.draw(ground, groundPos2.x, groundPos2.y);
 
         //table.draw(spriteBatch,1f);
-
+        scoreLabel.draw(spriteBatch,1);
         spriteBatch.end();
 
     }
@@ -136,6 +140,8 @@ public class PlayState extends State {
         backGround.dispose();
         chapa.dispose();
         ground.dispose();
+        scoreLabel.remove();
+        anto.dispose();
 
         for (Tube tube : tubes) {
             tube.dispose();
