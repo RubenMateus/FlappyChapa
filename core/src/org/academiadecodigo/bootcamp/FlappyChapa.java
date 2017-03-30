@@ -38,6 +38,7 @@ public class FlappyChapa extends ApplicationAdapter {
     @Override
     public void render() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        gsm.setSpriteBatch(batch);
         gsm.update(Gdx.graphics.getDeltaTime());
         gsm.render(batch);
     }
@@ -47,4 +48,5 @@ public class FlappyChapa extends ApplicationAdapter {
         batch.dispose();
         music.dispose();
     }
+
 }

@@ -4,8 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 import org.academiadecodigo.bootcamp.FlappyChapa;
+import org.academiadecodigo.bootcamp.Hud;
 import org.academiadecodigo.bootcamp.sprites.Bird;
 import org.academiadecodigo.bootcamp.sprites.Tube;
 import org.academiadecodigo.bootcamp.states.State;
@@ -25,6 +27,9 @@ public class PlayState extends State {
     private Vector2 groundPos1;
     private Vector2 groundPos2;
 
+    Label scoreLabel;
+
+
     private Array<Tube> tubes;
 
     public PlayState(GameStateManager gsm) {
@@ -34,6 +39,8 @@ public class PlayState extends State {
         Texture texture = new Texture("bg.png");
         backGround = new Background(camera);
         ground = new Texture("ground.png");
+        //scoreLabel = new Label("Score",);
+
 //        groundPos1 = new Vector2(camera.position.x - camera.viewportWidth / 2, GROUND_Y_OFFSET);
 //        groundPos2 = new Vector2((camera.position.x - camera.viewportWidth / 2) + ground.getWidth(), GROUND_Y_OFFSET);
         tubes = new Array<Tube>();
@@ -82,7 +89,9 @@ public class PlayState extends State {
     @Override
     public void render(SpriteBatch spriteBatch) {
         spriteBatch.setProjectionMatrix(camera.combined);
+
         spriteBatch.begin();
+
 
         //spriteBatch.draw(backGround, camera.position.x - (camera.viewportWidth / 2), 0);
         backGround.render(spriteBatch);

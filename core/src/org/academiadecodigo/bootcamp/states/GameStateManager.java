@@ -9,6 +9,7 @@ import java.util.Stack;
  */
 public class GameStateManager {
     private Stack<State> states;
+    private SpriteBatch spriteBatch;
 
     public GameStateManager(){
         states = new Stack<State>();
@@ -33,5 +34,13 @@ public class GameStateManager {
 
     public void render(SpriteBatch spriteBatch){
         states.peek().render(spriteBatch);
+    }
+
+    public void setSpriteBatch(SpriteBatch spriteBatch) {
+        this.spriteBatch = spriteBatch;
+    }
+
+    public SpriteBatch getSpriteBatch() {
+        return spriteBatch;
     }
 }

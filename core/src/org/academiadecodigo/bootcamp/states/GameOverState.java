@@ -1,12 +1,10 @@
 package org.academiadecodigo.bootcamp.states;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.academiadecodigo.bootcamp.FlappyChapa;
-import org.academiadecodigo.bootcamp.sprites.Animation;
+import org.academiadecodigo.bootcamp.Hud;
 
 /**
  * Created by Ruben on 25/03/2017.
@@ -17,6 +15,7 @@ public class GameOverState extends State {
     private Texture gameOver;
     private Texture chapaTriggered;
     private Texture texture;
+
 
     public GameOverState(GameStateManager gsm) {
         super(gsm);
@@ -48,7 +47,6 @@ public class GameOverState extends State {
         spriteBatch.draw(gameOver, camera.position.x - gameOver.getWidth() / 2, camera.position.y);
         spriteBatch.draw(chapaTriggered, camera.position.x - chapaTriggered.getWidth() / 2, camera.position.y / 1.5f);
         spriteBatch.draw(texture, camera.position.x - texture.getWidth() / 2, camera.position.y + 60);
-
         spriteBatch.end();
     }
 
