@@ -9,10 +9,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.TimeUtils;
 import org.academiadecodigo.bootcamp.FlappyChapa;
 import org.academiadecodigo.bootcamp.Hud;
 import org.academiadecodigo.bootcamp.sprites.Chapa;
 import org.academiadecodigo.bootcamp.sprites.Tube;
+
+import java.util.Timer;
 
 /**
  * Created by codecadet on 3/15/17.
@@ -32,6 +35,7 @@ public class PlayState extends State {
     Label scoreLabel;
     private int score;
     private Table table;
+    private long startTime;
 
     private Array<Tube> tubes;
 
@@ -49,7 +53,8 @@ public class PlayState extends State {
         //table.setBounds(camera.position.x,camera.position.y,camera.viewportWidth,camera.viewportHeight/10);
         table.setFillParent(true);*/
         scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel.setPosition(camera.position.x,camera.position.y);
+        scoreLabel.setPosition(camera.position.x,0);
+        startTime = TimeUtils.nanoTime();
 //        groundPos1 = new Vector2(camera.position.x - camera.viewportWidth / 2, GROUND_Y_OFFSET);
 //        groundPos2 = new Vector2((camera.position.x - camera.viewportWidth / 2) + ground.getWidth(), GROUND_Y_OFFSET);
         tubes = new Array<Tube>();
@@ -73,9 +78,14 @@ public class PlayState extends State {
 
         camera.position.x = chapa.getPosition().x + 80;
 
-        score++;
-        scoreLabel.setPosition(camera.position.x,camera.position.y);
-        scoreLabel.setText(Integer.toString(score));
+        if (TimeUtils.timeSinceNanos(startTime) > 1500000000) {
+            score++;
+
+            startTime = TimeUtils.nanoTime();
+        }
+
+            scoreLabel.setPosition(camera.position.x-20,camera.viewportHeight-15);
+        scoreLabel.setText(String.format("%06d", score));
         backGround.move(dt);
 
         for (int i = 0; i < tubes.size; i++) {

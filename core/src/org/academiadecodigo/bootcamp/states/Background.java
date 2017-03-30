@@ -44,7 +44,7 @@ public class Background {
         this.spriteClone = new Sprite(texture);
         this.spriteClone.setSize(texture.getWidth(),texture.getHeight());
         this.spriteClone.setPosition((FlappyChapa.WIDTH +
-                FlappyChapa.WIDTH/2) - 15f, 0);
+                FlappyChapa.WIDTH/2) - 20f, 0);
 
     }
 
