@@ -56,41 +56,16 @@ public class Background {
             score++;
 
             if (camera.position.x - (camera.viewportWidth / 2) > sprite.getX() + sprite.getWidth()) {
-                sprite.setPosition(sprite.getWidth() * 2, 0);
+                sprite.setPosition(camera.position.x + spriteClone.getWidth() - camera.viewportWidth, 0);
             }
             if (camera.position.x - (camera.viewportWidth / 2) > spriteClone.getX() + spriteClone.getWidth()) {
-                spriteClone.setPosition(spriteClone.getWidth() * 2, 0);
+                spriteClone.setPosition(camera.position.x + spriteClone.getWidth() - camera.viewportWidth, 0);
             }
 
+//            System.out.println("cameraX " + camera.position.x );
+//            System.out.println("spriteX " + sprite.getX());
+//            System.out.println("spriteCloneX " + spriteClone.getX());
 
-//            if (this.sprite.getY() < 0) {
-//
-//                if (this.spriteClone.getY() + this.spriteClone.getHeight() > cameraHeight) {
-//
-//                    this.spriteClone.translate(0, dt / DELAY);
-//
-//                }
-//
-//                this.sprite.translate(0, dt / DELAY);
-//
-//                if ((this.spriteClone.getY() + this.spriteClone.getHeight()) >= cameraHeight && this.sprite.getY() >= 0) {
-//                    this.spriteClone.setPosition(0, (-cameraHeight * 2) + 0.05f);
-//                }
-//
-//
-//            } else if (this.spriteClone.getY() <= 0) {
-//                if (this.sprite.getY() + this.sprite.getHeight() >= cameraHeight) {
-//
-//                    this.sprite.translate(0, dt / DELAY);
-//
-//                }
-//
-//                this.spriteClone.translate(0, dt / DELAY);
-//
-//                if ((this.sprite.getY() + this.sprite.getHeight()) > cameraHeight && this.spriteClone.getY() > 0) {
-//                    this.sprite.setPosition(0, (-cameraHeight * 2) + 0.05f);
-//                }
-//            }
        }
     }
 

@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector3;
 /**
  * Created by codecadet on 3/15/17.
  */
-public class Bird {
+public class Chapa {
     private static final int GRAVITY = -15;
     private static final int MOVEMENT = 100;
     private Vector3 position;
@@ -20,7 +20,7 @@ public class Bird {
     private Texture texture;
     private Sound flap;
 
-    public Bird(int x, int y) {
+    public Chapa(int x, int y) {
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0, 0, 0);
 
