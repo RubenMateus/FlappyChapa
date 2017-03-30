@@ -1,10 +1,13 @@
 package org.academiadecodigo.bootcamp.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import org.academiadecodigo.bootcamp.FlappyChapa;
 import org.academiadecodigo.bootcamp.Hud;
@@ -27,19 +30,26 @@ public class PlayState extends State {
     private Vector2 groundPos2;
 
     Label scoreLabel;
-
+    private int score;
+    private Table table;
 
     private Array<Tube> tubes;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
+        score = 0;
         chapa = new Chapa(50, 300);
         camera.setToOrtho(false, FlappyChapa.WIDTH / 2, FlappyChapa.HEIGHT / 2);
         Texture texture = new Texture("bg.png");
         backGround = new Background(camera);
+        backGround.start();
         ground = new Texture("ground.png");
-        //scoreLabel = new Label("Score",);
-
+        /*table = new Table();
+        table.setPosition(camera.position.x,camera.position.y);
+        //table.setBounds(camera.position.x,camera.position.y,camera.viewportWidth,camera.viewportHeight/10);
+        table.setFillParent(true);*/
+        scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreLabel.setPosition(camera.position.x,camera.position.y);
 //        groundPos1 = new Vector2(camera.position.x - camera.viewportWidth / 2, GROUND_Y_OFFSET);
 //        groundPos2 = new Vector2((camera.position.x - camera.viewportWidth / 2) + ground.getWidth(), GROUND_Y_OFFSET);
         tubes = new Array<Tube>();
@@ -63,8 +73,10 @@ public class PlayState extends State {
 
         camera.position.x = chapa.getPosition().x + 80;
 
+        score++;
+        scoreLabel.setPosition(camera.position.x,camera.position.y);
+        scoreLabel.setText(Integer.toString(score));
         backGround.move(dt);
-        backGround.start();
 
         for (int i = 0; i < tubes.size; i++) {
             Tube tube = tubes.get(i);
@@ -88,12 +100,11 @@ public class PlayState extends State {
     @Override
     public void render(SpriteBatch spriteBatch) {
         spriteBatch.setProjectionMatrix(camera.combined);
-
         spriteBatch.begin();
-
 
         //spriteBatch.draw(backGround, camera.position.x - (camera.viewportWidth / 2), 0);
         backGround.render(spriteBatch);
+        scoreLabel.draw(spriteBatch,1);
         spriteBatch.draw(chapa.getTexture(), chapa.getPosition().x, chapa.getPosition().y);
 
         for (Tube tube : tubes) {
@@ -103,6 +114,8 @@ public class PlayState extends State {
 
 //        spriteBatch.draw(ground, groundPos1.x, groundPos1.y);
 //        spriteBatch.draw(ground, groundPos2.x, groundPos2.y);
+
+        //table.draw(spriteBatch,1f);
 
         spriteBatch.end();
 
@@ -119,14 +132,5 @@ public class PlayState extends State {
         }
     }
 
-    private void updateGround() {
-        if (camera.position.x - (camera.viewportWidth / 2) > groundPos1.x + ground.getWidth()) {
-            groundPos1.add(ground.getWidth() * 2, 0);
-        }
-
-        if (camera.position.x - (camera.viewportWidth / 2) > groundPos2.x + ground.getWidth()) {
-            groundPos2.add(ground.getWidth() * 2, 0);
-        }
-    }
 }
 
