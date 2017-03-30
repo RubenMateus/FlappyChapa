@@ -26,7 +26,7 @@ public class Anto {
         this.sprite = new Sprite(texture);
         this.sprite.setSize(camera.viewportWidth/2,texture.getHeight()/2);
         this.sprite.setPosition(0, 0);
-        boundsTop = new Rectangle(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
+        boundsTop = new Rectangle(sprite.getX()-20, sprite.getY()-20 , sprite.getWidth()-20, sprite.getHeight()-20);
 
     }
 

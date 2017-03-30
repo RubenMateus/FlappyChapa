@@ -54,7 +54,7 @@ public class PlayState extends State {
         scoreLabel.setPosition(camera.position.x,0);
         startTime = TimeUtils.nanoTime();
         anto = new Anto(camera);
-        anto.repositionAnto(camera.position.x,camera.position.y);
+        anto.repositionAnto(camera.position.x + 30,camera.position.y - camera.viewportHeight/2);
 //        groundPos1 = new Vector2(camera.position.x - camera.viewportWidth / 2, GROUND_Y_OFFSET);
 //        groundPos2 = new Vector2((camera.position.x - camera.viewportWidth / 2) + ground.getWidth(), GROUND_Y_OFFSET);
         tubes = new Array<Tube>();
@@ -99,6 +99,12 @@ public class PlayState extends State {
             if (tube.collides(chapa.getBounds())) {
                 score = 0;
                 gsm.set(new GameOverState(gsm));
+            }
+
+            if(anto.collides(chapa.getBounds())){
+                score = 0;
+                gsm.set(new GameOverState(gsm));
+
             }
 
         }
