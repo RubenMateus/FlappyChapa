@@ -1,10 +1,10 @@
 package org.academiadecodigo.bootcamp.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.academiadecodigo.bootcamp.FlappyChapa;
-import org.academiadecodigo.bootcamp.Hud;
 
 /**
  * Created by Ruben on 25/03/2017.
@@ -15,6 +15,7 @@ public class GameOverState extends State {
     private Texture gameOver;
     private Texture chapaTriggered;
     private Texture texture;
+    private Music music;
 
 
     public GameOverState(GameStateManager gsm) {
@@ -24,11 +25,15 @@ public class GameOverState extends State {
         gameOver = new Texture("gameover.png");
         chapaTriggered = new Texture("chapaTriggered.png");
         texture = new Texture("icons/chapaicon.png");
+        music = Gdx.audio.newMusic(Gdx.files.internal("codigo.mp3"));
+        music.setVolume(2f);
+        music.play();
     }
 
     @Override
     public void handleInput() {
         if (Gdx.input.justTouched()) {
+            music.stop();
             gsm.set(new MenuState(gsm));
         }
     }
@@ -54,5 +59,6 @@ public class GameOverState extends State {
     public void dispose() {
         backGround.dispose();
         gameOver.dispose();
+        music.dispose();
     }
 }

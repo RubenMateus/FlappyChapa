@@ -2,9 +2,7 @@ package org.academiadecodigo.bootcamp;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.academiadecodigo.bootcamp.states.GameStateManager;
 import org.academiadecodigo.bootcamp.states.MenuState;
@@ -18,21 +16,12 @@ public class FlappyChapa extends ApplicationAdapter {
 
     private GameStateManager gsm;
     private SpriteBatch batch;
-    private Music music;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
         gsm = new GameStateManager();
-        initMusic();
         gsm.push(new MenuState(gsm));
-    }
-
-    private void initMusic() {
-        music = Gdx.audio.newMusic(Gdx.files.internal("bigSmoke1.mp3"));
-        music.setLooping(true);
-        music.setVolume(0.5f);
-        music.play();
     }
 
     @Override
@@ -46,7 +35,6 @@ public class FlappyChapa extends ApplicationAdapter {
     @Override
     public void dispose() {
         batch.dispose();
-        music.dispose();
     }
 
 }

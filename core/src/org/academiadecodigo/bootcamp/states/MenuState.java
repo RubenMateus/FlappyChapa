@@ -1,7 +1,7 @@
 package org.academiadecodigo.bootcamp.states;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.academiadecodigo.bootcamp.FlappyChapa;
@@ -13,17 +13,22 @@ public class MenuState extends State {
 
     private Texture backGround;
     private Texture playButton;
+    private Music music;
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, FlappyChapa.WIDTH / 2, FlappyChapa.HEIGHT / 2);
         backGround = new Texture("bg.png");
         playButton = new Texture("playbtn.png");
+        music = Gdx.audio.newMusic(Gdx.files.internal("bigSmoke_openingVocals.mp3"));
+        music.setVolume(0.5f);
+        music.play();
     }
 
     @Override
     public void handleInput() {
         if (Gdx.input.justTouched()) {
+            music.stop();
             gsm.set(new PlayState(gsm));
         }
 
@@ -47,5 +52,6 @@ public class MenuState extends State {
     public void dispose() {
         backGround.dispose();
         playButton.dispose();
+        music.dispose();
     }
 }

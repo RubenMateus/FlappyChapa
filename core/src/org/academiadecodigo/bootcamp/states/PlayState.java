@@ -1,6 +1,7 @@
 package org.academiadecodigo.bootcamp.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -37,6 +38,7 @@ public class PlayState extends State {
 
     private Array<Tube> tubes;
     private Anto anto;
+    private Music music;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -61,6 +63,11 @@ public class PlayState extends State {
         for (int i = 0; i < TUBE_COUNT; i++) {
             tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH)));
         }
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("bigSmoke_justAudio.mp3"));
+        music.setLooping(true);
+        music.setVolume(0.5f);
+        music.play();
     }
 
     @Override
@@ -127,12 +134,14 @@ public class PlayState extends State {
             Tube tube = tubes.get(i);
             if (tube.collides(chapa.getBounds())) {
                 score = 0;
+                music.stop();
                 gsm.set(new GameOverState(gsm));
             }
         }
 
         if(anto.collides(chapa.getBounds())){
             score = 0;
+            music.stop();
             gsm.set(new GameOverState(gsm));
 
         }
@@ -176,6 +185,7 @@ public class PlayState extends State {
         ground.dispose();
         scoreLabel.remove();
         anto.dispose();
+        music.dispose();
 
         for (Tube tube : tubes) {
             tube.dispose();
