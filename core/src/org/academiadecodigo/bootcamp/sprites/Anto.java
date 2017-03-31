@@ -11,12 +11,17 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class Anto {
 
+    public Sprite getSprite() {
+        return sprite;
+    }
+
     private Sprite sprite;
     private Texture texture;
 
     private OrthographicCamera camera;
     private Rectangle boundsTop;
-    boolean showUp;
+    public boolean showUp;
+    public boolean moving;
 
     public Anto(OrthographicCamera camera){
 
@@ -25,7 +30,7 @@ public class Anto {
         this.showUp = false;
         this.sprite = new Sprite(texture);
         this.sprite.setSize(camera.viewportWidth/2,texture.getHeight()/2);
-        this.sprite.setPosition(0, 0);
+        this.sprite.setPosition(-camera.viewportWidth, 0);
         boundsTop = new Rectangle(sprite.getX()-20, sprite.getY()-20 , sprite.getWidth()-20, sprite.getHeight()-20);
 
     }

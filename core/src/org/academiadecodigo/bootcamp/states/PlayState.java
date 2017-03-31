@@ -54,7 +54,6 @@ public class PlayState extends State {
         scoreLabel.setPosition(camera.position.x,0);
         startTime = TimeUtils.nanoTime();
         anto = new Anto(camera);
-        anto.repositionAnto(camera.position.x + 30,camera.position.y - camera.viewportHeight/2);
 //        groundPos1 = new Vector2(camera.position.x - camera.viewportWidth / 2, GROUND_Y_OFFSET);
 //        groundPos2 = new Vector2((camera.position.x - camera.viewportWidth / 2) + ground.getWidth(), GROUND_Y_OFFSET);
         tubes = new Array<Tube>();
@@ -72,6 +71,7 @@ public class PlayState extends State {
 
     @Override
     public void update(float dt) {
+
         handleInput();
 //        updateGround();
         chapa.update(dt);
@@ -86,26 +86,42 @@ public class PlayState extends State {
 
         backGround.move(dt);
 
-        int random = (int)Math.floor(Math.random()*10)+1;
+        int random = (int)Math.floor(Math.random()* 250)+1;
         System.out.println(random);
 
-        for (int i = 0; i < tubes.size; i++) {
-            Tube tube = tubes.get(i);
+        if( random == 250){
 
-            if (camera.position.x - (camera.viewportWidth / 2) > tube.getPosTopTube().x + tube.getTopTube().getWidth()) {
-                tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
+            anto.showUp = true;
+        }
+
+        if(!anto.showUp) {
+            for (int i = 0; i < tubes.size; i++) {
+                Tube tube = tubes.get(i);
+
+                if (camera.position.x - (camera.viewportWidth / 2) > tube.getPosTopTube().x + tube.getTopTube().getWidth()) {
+                    tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
+                }
+
+                if (tube.collides(chapa.getBounds())) {
+                    score = 0;
+                    gsm.set(new GameOverState(gsm));
+                }
+
             }
-
-            if (tube.collides(chapa.getBounds())) {
-                score = 0;
-                gsm.set(new GameOverState(gsm));
+        }else{
+            if(!anto.moving) {
+                anto.moving = true;
+                anto.repositionAnto(camera.viewportWidth + camera.position.x + TUBE_SPACING, 0);
             }
-
-            if(anto.collides(chapa.getBounds())){
-                score = 0;
-                gsm.set(new GameOverState(gsm));
-
+            else if( anto.getSprite().getX() < camera.position.x){
+                anto.showUp = false;
+                anto.moving = false;
             }
+        }
+
+        if(anto.collides(chapa.getBounds())){
+            score = 0;
+            gsm.set(new GameOverState(gsm));
 
         }
 
