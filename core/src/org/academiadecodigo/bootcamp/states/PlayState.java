@@ -5,14 +5,15 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import org.academiadecodigo.bootcamp.FlappyChapa;
-import org.academiadecodigo.bootcamp.sprites.*;
+import org.academiadecodigo.bootcamp.sprites.Anto;
+import org.academiadecodigo.bootcamp.sprites.Chapa;
+import org.academiadecodigo.bootcamp.sprites.Tube;
 
 /**
  * Created by codecadet on 3/15/17.
@@ -86,11 +87,19 @@ public class PlayState extends State {
 
         backGround.move(dt);
 
+        Texture texture = new Texture("Antoninho.png");
+
         int random = (int)Math.floor(Math.random()* 250)+1;
-        System.out.println(random);
 
-        if( random == 250){
+        if( random == 250 && !anto.moving){
 
+            int random2 = (int)Math.floor(Math.random()* 2)+1;
+            System.out.println(random2);
+            if(random2 == 1){
+                texture = new Texture("Antoninho.png");
+            }else{
+                texture = new Texture("Sergio.png");
+            }
             anto.showUp = true;
         }
 
@@ -102,20 +111,23 @@ public class PlayState extends State {
                     tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
                 }
 
-                if (tube.collides(chapa.getBounds())) {
-                    score = 0;
-                    gsm.set(new GameOverState(gsm));
-                }
 
             }
         }else{
             if(!anto.moving) {
                 anto.moving = true;
-                anto.repositionAnto(camera.viewportWidth + camera.position.x + TUBE_SPACING, 0);
+                anto.spawnAnto(camera.viewportWidth + camera.position.x + TUBE_SPACING, 0, texture);
             }
             else if( anto.getSprite().getX() < camera.position.x){
                 anto.showUp = false;
                 anto.moving = false;
+            }
+        }
+        for (int i = 0; i < tubes.size; i++) {
+            Tube tube = tubes.get(i);
+            if (tube.collides(chapa.getBounds())) {
+                score = 0;
+                gsm.set(new GameOverState(gsm));
             }
         }
 

@@ -29,13 +29,13 @@ public class Anto {
         this.texture = new Texture("Antoninho.png");
         this.showUp = false;
         this.sprite = new Sprite(texture);
-        this.sprite.setSize(camera.viewportWidth/2,texture.getHeight()/2);
+        this.sprite.setSize(camera.viewportWidth/2.5f,texture.getHeight()/2.5f);
         this.sprite.setPosition(-camera.viewportWidth, 0);
         boundsTop = new Rectangle(sprite.getX()-20, sprite.getY()-20 , sprite.getWidth()-20, sprite.getHeight()-20);
 
     }
 
-    public void spawnAnto(int x,int y, Texture texture){
+    public void spawnAnto(float x, float y, Texture texture){
         this.texture = texture;
         this.showUp = true;
         this.sprite = new Sprite(texture);
