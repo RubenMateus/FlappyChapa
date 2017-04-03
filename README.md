@@ -1,5 +1,6 @@
 # FlappyChapa
 Personal Project from the Gang of Three.
+
 Funny Game made with LibGDX using the Face and Fears from our best classmate Chapa.
 Based on the FlappyBird of BrentAureli.
 
